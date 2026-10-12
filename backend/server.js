@@ -6,7 +6,8 @@ const cors = require("cors");
 
 const {
     getPopularMovies,
-    getMovieDetails
+    getMovieDetails,
+    searchMovies
 } = require("./tmdb");
 
 const app = express();
@@ -26,6 +27,28 @@ app.get("/api/movies/popular", async (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: "Failed to fetch popular movies"
+        });
+    }
+});
+
+// Search movies
+app.get("/api/movies/search", async (req, res) => {
+    try {
+        const { query, page = 1 } = req.query;
+
+        if (!query || !query.trim()) {
+            return res.status(400).json({
+                error: "Search query is required"
+            });
+        }
+
+        const data = await searchMovies(query, Number(page));
+        res.json(data);
+    } catch (error) {
+        console.error("Movie search failed:", error);
+
+        res.status(500).json({
+            error: "Failed to search movies"
         });
     }
 });
@@ -61,23 +84,32 @@ app.get("/api/favourites", (req, res) => {
 
 
 // Add favourite
+
 app.post("/api/favourites", (req, res) => {
     try {
         const { movie_id, title, poster_path } = req.body;
+
+        if (!movie_id || !title) {
+            return res.status(400).json({
+                error: "Movie ID and title are required"
+            });
+        }
 
         db.prepare(`
             INSERT OR IGNORE INTO favorites
             (movie_id, title, poster_path)
             VALUES (?, ?, ?)
-        `).run(movie_id, title, poster_path);
+        `).run(movie_id, title, poster_path ?? null);
 
-        res.json({ message: "Movie added to favourites" });
-
+        res.json({ message: "Favourite saved" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Failed to add favourite" });
+        res.status(500).json({
+            error: "Failed to save favourite"
+        });
     }
 });
+
 
 
 // Remove favourite

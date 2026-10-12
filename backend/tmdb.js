@@ -19,6 +19,24 @@ async function getPopularMovies(page = 1) {
     return await response.json();
 }
 
+async function searchMovies(query, page = 1) {
+    const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&page=${page}`,
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+                accept: "application/json"
+            }
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(`TMDB error: ${response.status} ${await response.text()}`);
+    }
+
+    return response.json();
+}
+
 
 // Get movie details
 async function getMovieDetails(movieId) {
@@ -36,5 +54,6 @@ async function getMovieDetails(movieId) {
 
 module.exports = {
     getPopularMovies,
-    getMovieDetails
+    getMovieDetails,
+    searchMovies
 };

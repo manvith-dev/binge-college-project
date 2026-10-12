@@ -35,11 +35,10 @@ export function createMovieCard(movie) {
 
     card.innerHTML = `
         <div class="movie-card-poster">
-            ${
-                poster
-                    ? `<img src="${poster}" alt="${title} poster" loading="lazy">`
-                    : `<div class="poster-placeholder">No poster available</div>`
-            }
+            ${poster
+            ? `<img src="${poster}" alt="${title} poster" loading="lazy">`
+            : `<div class="poster-placeholder">No poster available</div>`
+        }
 
             <span class="movie-card-rating">★ ${rating}</span>
         </div>
