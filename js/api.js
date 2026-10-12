@@ -36,6 +36,57 @@ async function getMovieDetails(movieId) {
     return await response.json();
 }
 
+export async function getFavourites() {
+    const response = await fetch(
+        "http://localhost:3000/api/favourites"
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch favourites");
+    }
+
+    return await response.json();
+}
+
+
+export async function addFavourite(movie) {
+    const response = await fetch(
+        "http://localhost:3000/api/favourites",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                movie_id: movie.id,
+                title: movie.title,
+                poster_path: movie.poster_path
+            })
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to add favourite");
+    }
+
+    return await response.json();
+}
+
+
+export async function removeFavourite(movieId) {
+    const response = await fetch(
+        `http://localhost:3000/api/favourites/${movieId}`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to remove favourite");
+    }
+
+    return await response.json();
+}
 
 export {
     getPopularMovies,

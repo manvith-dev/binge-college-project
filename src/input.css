@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-    --color-accent: oklch(55.8% 0.288 302.321);
+    --color-primary: #9333ea;
+}
+
+@utility scrollbar-hide {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
