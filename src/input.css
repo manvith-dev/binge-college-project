@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #9333ea;
+}
+
+@utility scrollbar-hide {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+#hero #hero-title,
+#hero #hero-overview,
+#hero #hero-link {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 350ms ease, transform 350ms ease;
+}
+
+#hero.hero-changing #hero-title,
+#hero.hero-changing #hero-overview,
+#hero.hero-changing #hero-link {
+    opacity: 0;
+    transform: translateX(-30px);
+}
