@@ -1,87 +1,311 @@
 export function Hero(movie) {
-
     const backdropUrl =
         `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
 
     return `
-        <section class="relative isolate h-full overflow-hidden">
+        <style>
+            .hero {
+                position: relative;
+                isolation: isolate;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            /* Background Image */
+            .hero-background {
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+            }
+
+            .hero-background img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            /* Dark overlay */
+            .hero-overlay {
+                position: absolute;
+                inset: 0;
+            }
+
+            /* Left gradient for text */
+            .hero-gradient-left {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to right,
+                    #0a0a0a 0%,
+                    rgba(10, 10, 10, 0.8) 55%,
+                    transparent 100%
+                );
+            }
+
+            /* Bottom fade */
+            .hero-gradient-bottom {
+                position: absolute;
+                inset: auto 0 0;
+                height: 192px;
+                background: linear-gradient(
+                    to top,
+                    #0a0a0a,
+                    transparent
+                );
+            }
+
+            /* Hero Content */
+            .hero-container {
+                display: flex;
+                align-items: center;
+                min-height: calc(100vh - 5rem);
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 24px;
+            }
+
+            .hero-content {
+                max-width: 672px;
+                padding: 80px 0;
+            }
+
+            /* Label */
+            .hero-label {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .hero-label-line {
+                width: 32px;
+                height: 4px;
+                flex-shrink: 0;
+                border-radius: 9999px;
+                background-color: #9333ea;
+            }
+
+            .hero-label-text {
+                color: #c084fc;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.25em;
+            }
+
+            /* Title */
+            .hero-title {
+                color: #ffffff;
+                font-size: 48px;
+                font-weight: 900;
+                line-height: 0.95;
+                letter-spacing: -0.025em;
+            }
+
+            /* Movie information */
+            .hero-info {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-top: 24px;
+                color: #d4d4d4;
+                font-size: 14px;
+            }
+
+            .hero-release {
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            .hero-info-dot {
+                width: 4px;
+                height: 4px;
+                flex-shrink: 0;
+                border-radius: 50%;
+                background-color: #737373;
+            }
+
+            .hero-rating {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .hero-star {
+                color: #facc15;
+            }
+
+            /* Description */
+            .hero-description {
+                max-width: 576px;
+                margin-top: 20px;
+                color: #d4d4d4;
+                font-size: 16px;
+                line-height: 28px;
+            }
+
+            /* Buttons */
+            .hero-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 32px;
+            }
+
+            .hero-button {
+                display: inline-block;
+                padding: 14px 28px;
+                border-radius: 9999px;
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                transition:
+                    background-color 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .hero-button-primary {
+                background-color: #9333ea;
+                box-shadow: 0 10px 15px -3px rgba(88, 28, 135, 0.2);
+            }
+
+            .hero-button-primary:hover {
+                background-color: #a855f7;
+            }
+
+            .hero-button-secondary {
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                background-color: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+
+            .hero-button-secondary:hover {
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+
+            /* Responsive styles */
+            @media (min-width: 640px) {
+                .hero-title {
+                    font-size: 60px;
+                }
+
+                .hero-description {
+                    font-size: 18px;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .hero-title {
+                    font-size: 72px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero-container {
+                    padding: 0 16px;
+                }
+
+                .hero-content {
+                    padding: 64px 0;
+                }
+
+                .hero-title {
+                    font-size: 40px;
+                    overflow-wrap: anywhere;
+                }
+
+                .hero-label-text {
+                    font-size: 11px;
+                    letter-spacing: 0.18em;
+                }
+
+                .hero-description {
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+
+                .hero-button {
+                    padding: 12px 20px;
+                    font-size: 13px;
+                }
+            }
+        </style>
+
+        <section class="hero">
 
             <!-- Background Image -->
-            <div class="absolute inset-0 -z-10">
+            <div class="hero-background">
                 <img
                     src="${backdropUrl}"
                     alt=""
-                    class="h-full w-full object-cover object-center"
                 />
 
                 <!-- Dark overlay -->
-                <div class="absolute inset-0"></div>
+                <div class="hero-overlay"></div>
 
                 <!-- Left gradient for text -->
-                <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-transparent"></div>
+                <div class="hero-gradient-left"></div>
 
                 <!-- Bottom fade -->
-                <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-neutral-950 to-transparent"></div>
+                <div class="hero-gradient-bottom"></div>
             </div>
 
-
             <!-- Hero Content -->
-            <div class="mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl items-center px-6">
+            <div class="hero-container">
 
-                <div class="max-w-2xl py-20">
+                <div class="hero-content">
 
                     <!-- Label -->
-                    <div class="mb-5 flex items-center gap-3">
-                        <span class="h-1 w-8 rounded-full bg-purple-600"></span>
+                    <div class="hero-label">
+                        <span class="hero-label-line"></span>
 
-                        <span class="text-sm font-semibold uppercase tracking-[0.25em] text-purple-400">
+                        <span class="hero-label-text">
                             Featured Movie
                         </span>
                     </div>
 
-
                     <!-- Title -->
-                    <h1 class="text-5xl font-black leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                    <h1 class="hero-title">
                         ${movie.title}
                     </h1>
 
-
                     <!-- Movie information -->
-                    <div class="mt-6 flex items-center gap-4 text-sm text-neutral-300">
+                    <div class="hero-info">
 
-                        <span class="font-semibold text-white">
+                        <span class="hero-release">
                             ${movie.release_date?.slice(0, 4) || "N/A"}
                         </span>
 
-                        <span class="h-1 w-1 rounded-full bg-neutral-500"></span>
+                        <span class="hero-info-dot"></span>
 
-                        <span class="flex items-center gap-1">
-                            <span class="text-yellow-400">★</span>
-                            ${movie.vote_average?.toFixed(1)}
+                        <span class="hero-rating">
+                            <span class="hero-star">★</span>
+                            ${movie.vote_average?.toFixed(1) ?? "N/A"}
                         </span>
 
                     </div>
 
-
                     <!-- Description -->
-                    <p class="mt-5 max-w-xl text-base leading-7 text-neutral-300 sm:text-lg">
-                        ${movie.overview}
+                    <p class="hero-description">
+                        ${movie.overview || "No description available."}
                     </p>
 
-
                     <!-- Buttons -->
-                    <div class="mt-8 flex flex-wrap gap-3">
+                    <div class="hero-buttons">
 
                         <a
                             href="./pages/movie.html?id=${movie.id}"
-                            class="rounded-full bg-purple-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-purple-900/20 transition hover:bg-purple-500"
+                            class="hero-button hero-button-primary"
                         >
                             View Movie
                         </a>
 
                         <a
                             href="./pages/movies.html"
-                            class="rounded-full border border-white/15 bg-white/10 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition hover:bg-white/15"
+                            class="hero-button hero-button-secondary"
                         >
                             Explore Movies
                         </a>

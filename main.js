@@ -1,4 +1,3 @@
-
 import { Navbar } from "./components/navbar.js";
 import { Hero } from "./components/hero.js";
 import { MovieGrid } from "./components/movie-grid.js";
@@ -10,11 +9,8 @@ document.getElementById("footer").innerHTML = Footer();
 
 const data = await getPopularMovies();
 
-document.getElementById("hero").innerHTML =
-    Hero(data.results[0]);
-
-document.getElementById("popular-movies").innerHTML =
-    MovieGrid(data.results);
+document.getElementById("hero").innerHTML = Hero(data.results[0]);
+document.getElementById("popular-movies").innerHTML = MovieGrid(data.results);
 
 // Handle favourite button clicks
 document.querySelectorAll(".add-favourite").forEach(button => {
@@ -31,7 +27,7 @@ document.querySelectorAll(".add-favourite").forEach(button => {
             await addFavourite(movie);
 
             button.textContent = "♥";
-            button.classList.add("text-purple-400");
+            button.classList.add("is-favourite");
             button.title = "Saved to favourites";
             button.setAttribute("aria-label", "Saved to favourites");
 

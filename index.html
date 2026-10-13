@@ -2,21 +2,53 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Binge</title>
-    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="./src/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #0a0a0a;
+            color: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        #navbar {
+            min-height: 10vh;
+        }
+
+        main {
+            width: 100%;
+        }
+
+        #hero,
+        #popular-movies {
+            width: 100%;
+        }
+
+        #footer {
+            width: 100%;
+        }
+    </style>
 </head>
 
-<body class="bg-neutral-950 text-neutral-50">
+<body>
 
-    <div class="h-[10vh]" id="navbar"></div>
+    <div id="navbar"></div>
+
     <main>
-
         <div id="hero"></div>
-
         <div id="popular-movies"></div>
-
     </main>
+
     <div id="footer"></div>
+
     <script type="module" src="./main.js"></script>
 </body>
 

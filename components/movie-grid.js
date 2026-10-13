@@ -1,75 +1,260 @@
-
 export function MovieGrid(movies) {
     return `
-        <section class="mx-auto max-w-7xl px-6 py-16">
+        <style>
+            /* Movie Grid Section */
+            .movie-grid-section {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 64px 24px;
+            }
 
-            <div class="mb-6 flex items-end justify-between">
+            /* Section Header */
+            .movie-grid-header {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                margin-bottom: 24px;
+            }
+
+            .movie-grid-label {
+                color: #c084fc;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+            }
+
+            .movie-grid-title {
+                margin-top: 8px;
+                color: #ffffff;
+                font-size: 30px;
+                font-weight: 700;
+            }
+
+            .movie-grid-view-all {
+                color: #a3a3a3;
+                font-size: 14px;
+                font-weight: 500;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+
+            .movie-grid-view-all:hover {
+                color: #ffffff;
+            }
+
+            /* Horizontal Movie List */
+            .movie-grid-list {
+                display: flex;
+                gap: 20px;
+                overflow-x: auto;
+                padding-bottom: 16px;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .movie-grid-list::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Individual Movie Card */
+            .movie-grid-card {
+                width: 176px;
+                flex: none;
+                min-width: 0;
+            }
+
+            .movie-grid-poster-container {
+                position: relative;
+                overflow: hidden;
+                border-radius: 16px;
+                background-color: #171717;
+            }
+
+            .movie-grid-poster-link {
+                display: block;
+            }
+
+            .movie-grid-poster {
+                display: block;
+                width: 100%;
+                aspect-ratio: 2 / 3;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            .movie-grid-poster-link:hover .movie-grid-poster {
+                transform: scale(1.04);
+            }
+
+            /* Favourite Button */
+            .add-favourite {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 50%;
+                background-color: rgba(0, 0, 0, 0.85);
+                color: #ffffff;
+                font-size: 30px;
+                line-height: 1;
+                cursor: pointer;
+                transition:
+                    background-color 0.2s ease,
+                    color 0.2s ease,
+                    transform 0.2s ease;
+            }
+
+            .add-favourite:hover {
+                background-color: #262626;
+                transform: scale(1.08);
+            }
+
+            .add-favourite:focus-visible {
+                outline: 2px solid #a855f7;
+                outline-offset: 3px;
+            }
+
+            /* Movie Information */
+            .movie-grid-card-title {
+                margin-top: 12px;
+                overflow: hidden;
+                color: #ffffff;
+                font-weight: 600;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .movie-grid-card-info {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 4px;
+                color: #a3a3a3;
+                font-size: 14px;
+            }
+
+            .movie-grid-rating {
+                color: #facc15;
+                white-space: nowrap;
+            }
+
+            /* Responsive Styles */
+            @media (min-width: 640px) {
+                .movie-grid-card {
+                    width: 208px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .movie-grid-section {
+                    padding: 48px 16px;
+                }
+
+                .movie-grid-title {
+                    font-size: 25px;
+                }
+
+                .movie-grid-label {
+                    font-size: 11px;
+                    letter-spacing: 0.15em;
+                }
+
+                .movie-grid-card {
+                    width: 160px;
+                }
+
+                .movie-grid-list {
+                    gap: 16px;
+                }
+
+                .add-favourite {
+                    top: 8px;
+                    right: 8px;
+                    width: 38px;
+                    height: 38px;
+                    font-size: 26px;
+                }
+            }
+        </style>
+
+        <section class="movie-grid-section">
+
+            <!-- Section Header -->
+            <div class="movie-grid-header">
                 <div>
-                    <p class="text-sm font-semibold uppercase tracking-[0.2em] text-purple-400">
+                    <p class="movie-grid-label">
                         What's trending
                     </p>
 
-                    <h2 class="mt-2 text-3xl font-bold text-white">
+                    <h2 class="movie-grid-title">
                         Popular Movies
                     </h2>
                 </div>
 
                 <a
                     href="./pages/movies.html"
-                    class="text-sm font-medium text-neutral-400 transition hover:text-white"
+                    class="movie-grid-view-all"
                 >
                     View all →
                 </a>
             </div>
 
-            <div class="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            <!-- Horizontal Movie List -->
+            <div class="movie-grid-list">
 
                 ${movies.map(movie => `
-                    <div class="w-44 flex-none sm:w-52">
+                    <div class="movie-grid-card">
 
-                        <div class="relative overflow-hidden rounded-2xl bg-neutral-900">
+                        <!-- Movie Poster -->
+                        <div class="movie-grid-poster-container">
 
-    <a href="./pages/movie.html?id=${movie.id}" class="block">
-        <img
-            src="https://image.tmdb.org/t/p/w342${movie.poster_path}"
-            alt="${movie.title}"
-            class="block aspect-[2/3] w-full object-cover"
-        />
-    </a>
+                            <a
+                                href="./pages/movie.html?id=${movie.id}"
+                                class="movie-grid-poster-link"
+                            >
+                                <img
+                                    src="https://image.tmdb.org/t/p/w342${movie.poster_path}"
+                                    alt="${movie.title}"
+                                    class="movie-grid-poster"
+                                    loading="lazy"
+                                />
+                            </a>
 
-    <button
-    type="button"
-    class="add-favourite"
-    data-id="${movie.id}"
-    style="
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        z-index: 9999;
-        width: 44px;
-        height: 44px;
-        background: black;
-        color: white;
-        border-radius: 50%;
-        font-size: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    "
->
-    ♡
-</button>
+                            <!-- Favourite Button -->
+                            <button
+                                type="button"
+                                class="add-favourite"
+                                data-id="${movie.id}"
+                                aria-label="Add ${movie.title} to favourites"
+                                title="Add to favourites"
+                            >
+                                ♡
+                            </button>
 
-</div>
+                        </div>
 
-                        <h3 class="mt-3 truncate font-semibold text-white">
+                        <!-- Movie Title -->
+                        <h3 class="movie-grid-card-title" title="${movie.title}">
                             ${movie.title}
                         </h3>
 
-                        <div class="mt-1 flex items-center gap-2 text-sm text-neutral-400">
-                            <span>${movie.release_date?.slice(0, 4) || "N/A"}</span>
+                        <!-- Movie Information -->
+                        <div class="movie-grid-card-info">
+                            <span>
+                                ${movie.release_date?.slice(0, 4) || "N/A"}
+                            </span>
+
                             <span>•</span>
-                            <span class="text-yellow-400">
+
+                            <span class="movie-grid-rating">
                                 ★ ${movie.vote_average?.toFixed(1) ?? "N/A"}
                             </span>
                         </div>

@@ -1,18 +1,17 @@
-@import "tailwindcss";
-
-@theme {
+:root {
     --color-primary: #9333ea;
 }
 
-@utility scrollbar-hide {
+/* Hide scrollbars */
+.scrollbar-hide {
     scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
 
+/* Hero carousel transitions */
 #hero #hero-title,
 #hero #hero-overview,
 #hero #hero-link {

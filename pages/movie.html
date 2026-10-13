@@ -5,17 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie | Binge</title>
-    <link rel="stylesheet" href="../dist/output.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: #0a0a0a;
+            color: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        .movie-loading {
+            padding: 128px 20px;
+            color: #a3a3a3;
+            text-align: center;
+        }
+    </style>
 </head>
 
-<body class="min-h-screen bg-neutral-950 text-neutral-50">
-
+<body>
     <div id="navbar"></div>
 
-    <!-- movie.js fills this in using the ?id= in the URL -->
-    <div id="movie">
-        <p class="py-32 text-center text-neutral-400">Loading…</p>
-    </div>
+    <main id="movie">
+        <p class="movie-loading">Loading movie...</p>
+    </main>
 
     <script type="module" src="../js/movie.js"></script>
 </body>

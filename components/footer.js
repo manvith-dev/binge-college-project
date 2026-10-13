@@ -6,17 +6,133 @@ export function Footer(isSubPage = false) {
         : "./pages/favourites.html";
 
     return `
-        <footer class="border-t border-neutral-800 bg-neutral-950">
-            <div class="mx-auto max-w-7xl px-6 py-12">
-                <div class="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+        <style>
+            .footer {
+                border-top: 1px solid #262626;
+                background-color: #0a0a0a;
+                color: #ffffff;
+            }
 
-                    <!-- Brand -->
-                    <div class="max-w-sm">
-                        <a href="${home}" class="text-2xl font-black tracking-tight text-white">
-                            Binge<span class="text-purple-500">.</span>
+            .footer-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 48px 24px;
+            }
+
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .footer-brand {
+                max-width: 384px;
+            }
+
+            .footer-logo {
+                color: #ffffff;
+                font-size: 24px;
+                font-weight: 900;
+                letter-spacing: -0.6px;
+                text-decoration: none;
+            }
+
+            .footer-logo span {
+                color: #a855f7;
+            }
+
+            .footer-description {
+                margin-top: 16px;
+                color: #737373;
+                font-size: 14px;
+                line-height: 24px;
+            }
+
+            .footer-heading {
+                color: #ffffff;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 16px;
+                font-size: 14px;
+            }
+
+            .footer-links a,
+            .footer-links span {
+                color: #737373;
+                text-decoration: none;
+            }
+
+            .footer-links a {
+                transition: color 0.2s ease;
+            }
+
+            .footer-links a:hover {
+                color: #ffffff;
+            }
+
+            .footer-bottom {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 48px;
+                padding-top: 24px;
+                border-top: 1px solid #262626;
+                font-size: 14px;
+            }
+
+            .footer-bottom p {
+                color: #525252;
+            }
+
+            @media (min-width: 768px) {
+                .footer-content {
+                    flex-direction: row;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                }
+            }
+
+            @media (min-width: 640px) {
+                .footer-bottom {
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .footer-container {
+                    padding: 36px 16px;
+                }
+
+                .footer-content {
+                    gap: 32px;
+                }
+
+                .footer-bottom {
+                    margin-top: 36px;
+                }
+            }
+        </style>
+
+        <footer class="footer">
+            <div class="footer-container">
+
+                <!-- Brand -->
+                <div class="footer-content">
+
+                    <div class="footer-brand">
+                        <a href="${home}" class="footer-logo">
+                            Binge<span>.</span>
                         </a>
 
-                        <p class="mt-4 text-sm leading-6 text-neutral-500">
+                        <p class="footer-description">
                             Discover your next favourite movie.
                             Explore popular films, find hidden gems,
                             and keep track of everything you want to watch.
@@ -25,38 +141,34 @@ export function Footer(isSubPage = false) {
 
                     <!-- Navigation -->
                     <div>
-                        <h3 class="text-sm font-semibold text-white">Explore</h3>
+                        <h3 class="footer-heading">Explore</h3>
 
-                        <div class="mt-4 flex flex-col gap-3 text-sm">
-                            <a href="${home}" class="text-neutral-500 transition hover:text-white">Home</a>
-                            <a href="${movies}" class="text-neutral-500 transition hover:text-white">Movies</a>
-                            <a href="${favourites}" class="text-neutral-500 transition hover:text-white">Favourites</a>
+                        <div class="footer-links">
+                            <a href="${home}">Home</a>
+                            <a href="${movies}">Movies</a>
+                            <a href="${favourites}">Favourites</a>
                         </div>
                     </div>
 
                     <!-- Project -->
                     <div>
-                        <h3 class="text-sm font-semibold text-white">Binge</h3>
+                        <h3 class="footer-heading">Binge</h3>
 
-                        <div class="mt-4 flex flex-col gap-3 text-sm">
-                            <span class="text-neutral-500">Movie Explorer</span>
-                            <span class="text-neutral-500">Built with Vanilla JS</span>
-                            <span class="text-neutral-500">Powered by TMDB</span>
+                        <div class="footer-links">
+                            <span>Movie Explorer</span>
+                            <span>Built with Vanilla JS</span>
+                            <span>Powered by TMDB</span>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- Bottom -->
-                <div class="mt-12 flex flex-col gap-4 border-t border-neutral-800 pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-                    <p class="text-neutral-600">
-                        © 2026 Binge. All rights reserved.
-                    </p>
-
-                    <p class="text-neutral-600">
-                        Made for movie lovers 🎬
-                    </p>
+                <div class="footer-bottom">
+                    <p>© 2026 Binge. All rights reserved.</p>
+                    <p>Made for movie lovers 🎬</p>
                 </div>
+
             </div>
         </footer>
     `;

@@ -9,8 +9,6 @@ node_modules/
 # SQLite database
 backend/movies.db
 
-# Tailwind generated files
-dist/
 
 # Logs
 npm-debug.log*
