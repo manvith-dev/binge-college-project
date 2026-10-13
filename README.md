@@ -1,140 +1,62 @@
-# Binge — Movies & Movie Details Pages
+# Binge
 
-## Project Overview
+Binge is a movie exploration website built with HTML, CSS, Vanilla JavaScript, Node.js, Express, and SQLite. It uses the TMDB API through an existing backend to provide movie discovery and details.
 
-Binge is a movie exploration website built using **HTML, Tailwind CSS, Vanilla JavaScript, Node.js, Express, and SQLite**. Movie data comes from the TMDB API through our existing backend.
+## Features
 
-Your task is to build:
+- **Browse Movies:** Explore popular movies.
+- **Search:** Find movies by title.
+- **Movie Details:** View posters, overviews, release dates, ratings, and other details.
+- **Favourites:** Add and remove movies from your favourites.
+- **Responsive UI:** Dark theme with purple accents and a clean, modern layout.
 
-- `pages/movies.html` — movie browsing page.
-- `pages/movie.html` — individual movie details page.
+## Tech Stack
 
-Follow the existing Binge design: dark background, purple (`purple-600`) accents, rounded movie cards, and a clean, modern UI.
+- **Frontend:** HTML, CSS, Vanilla JavaScript
+- **Backend:** Node.js, Express
+- **Database:** SQLite
+- **Movie Data:** TMDB API
 
-## Important Requirements
+## Getting Started
 
-### 1. Movies Page
+### Prerequisites
 
-- Display movies fetched from our existing backend API.
-- Include a search feature if possible.
-- Each movie card should link to its details page using its TMDB movie ID.
-- Include an **Add to Favourites** heart button.
-- Prevent duplicate favourites and show suitable feedback when a movie is added.
+- Node.js and npm
+- A configured TMDB API key
 
-### 2. Movie Details Page
+### Installation
 
-The following URL **must work**:
+1. Clone the repository and navigate to the project directory.
+2. Install the backend dependencies:
 
-`http://127.0.0.1:5500/pages/movie.html?id=969681`
+   ```bash
+   cd backend
+   npm install
+   ```
 
-The ID is an example; the page must work for any valid TMDB movie ID.
+   Running the Application
 
-Requirements:
+3. Start the backend server from the project root:
+   node backend/server.js
+4. Open index.html using a local development server, such as VS Code Live Server, on port 5500.
+   The frontend runs at http://127.0.0.1:5500, and the backend API runs at http://localhost:3000/api.
+   Project Structure
+   ```
+   movieWebsite/
+   ├── index.html
+   ├── pages/
+   │ ├── movies.html
+   │ ├── movie.html
+   │ └── favourites.html
+   ├── components/
+   ├── js/
+   ├── backend/
+   │ ├── server.js
+   │ ├── database.js
+   │ └── tmdb.js
+   └── README.md
+   ```
 
-- Read the movie ID from the URL using `URLSearchParams`.
-- Fetch that movie's details from our existing backend.
-- Display its poster, title, overview, release date, rating, and other useful details.
-- Include an Add to Favourites button.
-- Handle invalid IDs, loading states, and API errors.
+### License
 
-Example:
-
-```js
-const params = new URLSearchParams(window.location.search);
-const movieId = params.get("id");
-```
-
-## Existing Backend API
-
-The backend already exists. **Do not create a new backend or connect directly to TMDB from the frontend.**
-
-Base URL: `http://localhost:3000/api`
-
-| Method | Endpoint                      | Purpose                            |
-| ------ | ----------------------------- | ---------------------------------- |
-| GET    | `/movies/popular`             | Fetch popular movies               |
-| GET    | `/movies/search?query=batman` | Search movies                      |
-| GET    | `/movies/:id`                 | Fetch details for a specific movie |
-| GET    | `/favourites`                 | Get saved favourites               |
-| POST   | `/favourites`                 | Add a movie to favourites          |
-| DELETE | `/favourites/:movieId`        | Remove a favourite                 |
-
-### Adding a Favourite
-
-Send a `POST` request to:
-
-`http://localhost:3000/api/favourites`
-
-JSON body:
-
-```json
-{
-  "movie_id": 969681,
-  "title": "Movie Title",
-  "poster_path": "/poster.jpg"
-}
-```
-
-Use the actual movie object's `id`, `title`, and `poster_path` values. Do not hardcode the example values.
-
-### Removing a Favourite
-
-Send a `DELETE` request to:
-
-`http://localhost:3000/api/favourites/MOVIE_ID`
-
-Use the actual movie ID.
-
-## Existing Project Structure
-
-```text
-movieWebsite/
-├── index.html
-├── pages/
-│   ├── movies.html
-│   ├── movie.html
-│   └── favourites.html
-├── components/
-│   ├── navbar.js
-│   ├── footer.js
-│   └── favourites/
-│       ├── favourite-card.js
-│       └── favourite-grid.js
-├── js/
-│   ├── api.js
-│   ├── movies.js
-│   ├── movie-details.js
-│   └── favourites.js
-├── src/input.css
-├── dist/output.css
-└── backend/
-    ├── server.js
-    ├── database.js
-    └── tmdb.js
-```
-
-Reuse existing components and `js/api.js` functions wherever possible. Check their current exports before implementing new functions.
-
-## Important Rules
-
-- Use plain HTML, Tailwind CSS, and Vanilla JavaScript. **Do not use React or another frontend framework.**
-- Use ES modules (`import`/`export`).
-- Reuse the existing Navbar and Footer components.
-- For pages inside `pages/`, use `../dist/output.css` for the stylesheet.
-- Keep the frontend on Live Preview port `5500` and the backend on port `3000`.
-- Use TMDB poster URLs in this format:
-
-`https://image.tmdb.org/t/p/w500/POSTER_PATH`
-
-- Ensure navigation paths work from inside the `pages/` directory.
-- Do not overwrite or break existing Home and Favourites functionality.
-
-## Final Testing
-
-1. Open `pages/movies.html` and verify movies load.
-2. Add a movie to favourites and confirm it appears on `pages/favourites.html`.
-3. Open `http://127.0.0.1:5500/pages/movie.html?id=969681` and verify the correct movie details load.
-4. Test the favourites button on both pages.
-5. Check the browser console for errors.
-
-**Goal:** Build both pages so they integrate cleanly with the existing Binge project and its backend API.
+This project is intended for educational purposes.
